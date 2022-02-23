@@ -38,14 +38,21 @@ galeryList.addEventListener("click", e => {
 
 const instance = basicLightbox.create(
   `
-    <div class="modal">
-        <img src = ""/>
-        <a class = 'close'>Close</a>
-    </div>
+<img class = "modal-img" src="" >
 `,
   {
     onShow: instance => {
-      instance.element().querySelector("a").onclick = instance.close;
+      window.addEventListener("keydown", onEscClick);
+    },
+    nShow: instance => {
+      window.removeEventListener("keydown", onEscClick);
     }
   }
 );
+
+function onEscClick(e) {
+  if (e.key === "Escape") {
+    instance.close();
+    return;
+  }
+}
